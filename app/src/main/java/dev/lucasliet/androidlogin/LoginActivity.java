@@ -24,9 +24,25 @@ public class LoginActivity extends AppCompatActivity {
         textViewSignUp = findViewById(R.id.textViewSignUp);
         buttonLogin = findViewById(R.id.buttonLogin);
 
-        if (Hawk.contains("tem_cadastro")){
-            if (Hawk.get("tem_cadastro")){
+        if (Hawk.contains("has_registration")){
+            if (Hawk.get("has_registration")){
                 enableLogin();
+            } else {
+                disableLogin();
+            }
+        } else {
+            disableLogin();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Hawk.contains("has_registration")){
+            if (Hawk.get("has_registration")){
+                enableLogin();
+            } else {
+                disableLogin();
             }
         } else {
             disableLogin();
@@ -51,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void Login(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }
