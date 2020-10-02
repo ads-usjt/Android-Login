@@ -1,4 +1,4 @@
-package dev.lucasliet.androidlogin.dao;
+package dev.lucasliet.androidlogin.model;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
