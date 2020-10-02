@@ -1,4 +1,4 @@
-package dev.lucasliet.androidlogin;
+package dev.lucasliet.androidlogin.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.orhanobut.hawk.Hawk;
+
+import dev.lucasliet.androidlogin.R;
 
 public class LoginActivity extends AppCompatActivity {
 

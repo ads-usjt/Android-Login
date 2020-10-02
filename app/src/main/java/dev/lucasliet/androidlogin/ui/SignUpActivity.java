@@ -1,4 +1,4 @@
-package dev.lucasliet.androidlogin;
+package dev.lucasliet.androidlogin.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.orhanobut.hawk.Hawk;
+
+import dev.lucasliet.androidlogin.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
