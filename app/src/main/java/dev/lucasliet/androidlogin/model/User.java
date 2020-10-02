@@ -3,7 +3,7 @@ package dev.lucasliet.androidlogin.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "usuario")
+@Entity(tableName = "user")
 public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;
