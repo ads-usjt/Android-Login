@@ -18,5 +18,4 @@ public interface UserDAO {
 
     @Query("SELECT * from user LIMIT 1")
     LiveData<User> getUser();
-"
 }
