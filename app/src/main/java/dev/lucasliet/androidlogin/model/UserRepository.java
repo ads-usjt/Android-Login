@@ -12,7 +12,7 @@ public class UserRepository {
         userDAO = db.userDAO();
         user = userDAO.getUser();
     }
-    LiveData<User> getUsuario() {
+    LiveData<User> getUser() {
         return user;
     }
     void insert(User user) {
