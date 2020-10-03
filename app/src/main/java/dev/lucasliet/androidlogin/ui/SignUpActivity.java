@@ -19,7 +19,6 @@ import dev.lucasliet.androidlogin.model.UserViewModel;
 public class SignUpActivity extends AppCompatActivity {
 
     private UserViewModel userViewModel;
-    private User user;
     private User currentUser;
     private EditText editTextName;
     private EditText editTextCPF;
@@ -48,7 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
             editTextName.setText(user.getName());
             editTextCPF.setText(user.getCpf());
             editTextEmail.setText(user.getEmail());
-            editTextPassword.setText(user.getSenha());
+            editTextPassword.setText(user.getPassword());
         }
     }
 
@@ -57,7 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
         currentUser.setCpf(editTextCPF.getText().toString());
         currentUser.setEmail(editTextEmail.getText().toString());
         currentUser.setName(editTextName.getText().toString());
-        currentUser.setSenha(editTextPassword.getText().toString());
+        currentUser.setPassword(editTextPassword.getText().toString());
 
         userViewModel.insert(currentUser);
         Toast.makeText(

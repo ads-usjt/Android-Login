@@ -53,11 +53,11 @@ public class User {
         this.email = email;
     }
 
-    public String getSenha() {
+    public String getPassword() {
         return password;
     }
 
-    public void setSenha(String senha) {
+    public void setPassword(String senha) {
         this.password = senha;
     }
 }

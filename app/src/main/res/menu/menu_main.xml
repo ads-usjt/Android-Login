@@ -4,14 +4,14 @@
     tools:context=".ui.MainActivity">
 
     <item
-        android:id="@+id/editar"
-        android:icon="@drawable/ic_editar"
+        android:id="@+id/edit"
+        android:icon="@drawable/ic_edit"
         app:showAsAction="always|withText"
         android:title="Sair"/>
 
     <item
-        android:id="@+id/sair"
-        android:icon="@drawable/ic_sair"
+        android:id="@+id/exit"
+        android:icon="@drawable/ic_exit"
         app:showAsAction="always|withText"
         android:title="Sair"/>
 

@@ -1,6 +1,5 @@
 package dev.lucasliet.androidlogin.ui;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -25,15 +24,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.editar:
-                Intent intent = new Intent(this, SignUpActivity.class);
+            case R.id.edit:
+                Intent intent = new Intent(this,SignUpActivity.class);
                 startActivity(intent);
-            case R.id.sair:
+            case R.id.exit:
                 finish();
-                return true;
+                return(true);
         }
-        return super.onOptionsItemSelected(item);
+        return(super.onOptionsItemSelected(item));
     }
 }

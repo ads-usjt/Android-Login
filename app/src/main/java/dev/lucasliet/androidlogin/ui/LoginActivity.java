@@ -1,21 +1,30 @@
 package dev.lucasliet.androidlogin.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.orhanobut.hawk.Hawk;
 
 import dev.lucasliet.androidlogin.R;
+import dev.lucasliet.androidlogin.model.User;
+import dev.lucasliet.androidlogin.model.UserViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 
     private TextView textViewSignUp;
     private Button buttonLogin;
+    private UserViewModel userViewModel;
+    private User currentUser;
+    private EditText editTextEmail;
+    private EditText editTextPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +44,16 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             disableLogin();
         }
+
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextPassword = findViewById(R.id.editTextPassword);
+
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel.getUser().observe(this, this::updateUser);
+    }
+
+    private void updateUser(User user) {
+        currentUser = user;
     }
 
     @Override
@@ -69,7 +88,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void Login(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        if (currentUser != null
+                && currentUser.getEmail().equalsIgnoreCase(editTextEmail.getText().toString())
+                && currentUser.getPassword().equals(editTextPassword.getText().toString())
+        ){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Usuário não encontrado", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
