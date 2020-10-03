@@ -11,6 +11,9 @@ public class User {
     private String cpf;
     private String email;
     private String password;
+
+    public User(){}
+
     public User(String name, String cpf, String email, String password) {
         this.name = name;
         this.cpf = cpf;
