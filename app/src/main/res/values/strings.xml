@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Android Login</string>
+    <string name="app_name">CadLog</string>
+    <string name="user_not_found">Usuário não encontrado</string>
+    <string name="user_register_sucess">Usuário Salvo com sucesso!</string>
 </resources>

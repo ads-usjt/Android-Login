@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import dev.lucasliet.androidlogin.R;
+import dev.lucasliet.androidlogin.factory.ActionBarFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActionBarFactory.createActionBar(getSupportActionBar());
     }
 
     @Override

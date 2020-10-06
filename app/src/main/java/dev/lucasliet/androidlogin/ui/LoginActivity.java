@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.orhanobut.hawk.Hawk;
 
 import dev.lucasliet.androidlogin.R;
+import dev.lucasliet.androidlogin.factory.ActionBarFactory;
 import dev.lucasliet.androidlogin.model.User;
 import dev.lucasliet.androidlogin.model.UserViewModel;
 
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ActionBarFactory.createActionBar(getSupportActionBar());
         Hawk.init(this).build();
 
         textViewSignUp = findViewById(R.id.textViewSignUp);
@@ -95,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "Usuário não encontrado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.user_not_found, Toast.LENGTH_SHORT).show();
         }
 
     }

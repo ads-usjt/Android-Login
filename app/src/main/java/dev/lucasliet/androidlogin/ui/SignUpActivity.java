@@ -1,8 +1,6 @@
 package dev.lucasliet.androidlogin.ui;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -13,6 +11,7 @@ import android.widget.Toast;
 import com.orhanobut.hawk.Hawk;
 
 import dev.lucasliet.androidlogin.R;
+import dev.lucasliet.androidlogin.factory.ActionBarFactory;
 import dev.lucasliet.androidlogin.model.User;
 import dev.lucasliet.androidlogin.model.UserViewModel;
 
@@ -30,6 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        ActionBarFactory.createActionBar(getSupportActionBar());
         Hawk.init(this).build();
 
         editTextCPF = findViewById(R.id.editTextCPF);
@@ -61,7 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
         userViewModel.insert(currentUser);
         Toast.makeText(
                 this,
-                "Usuário salvo com sucesso",
+                R.string.user_register_sucess,
                 Toast.LENGTH_SHORT
         ).show();
         Hawk.put("has_registration", true);
