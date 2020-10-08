@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
     private void enableLogin() {
         textViewSignUp.setVisibility(View.GONE);
         buttonLogin.setEnabled(true);
-        buttonLogin.setBackgroundColor(getColor(R.color.colorPrimary));
+        buttonLogin.setBackgroundColor(getColor(R.color.colorAccent));
     }
 
     private void disableLogin() {
