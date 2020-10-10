@@ -1,11 +1,12 @@
 package dev.lucasliet.androidlogin.ui;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ActionBarFactory.createActionBar(Objects.requireNonNull(getSupportActionBar()));
 
+        replaceFragment(HomeFragment.newInstance("",""), "HOMEFRAGMENT", "HOME");
+
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
 
         bottomNav.setOnNavigationItemSelectedListener(item -> {
@@ -31,19 +34,19 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()){
 
                 case R.id.home:
-                    Log.d("NAVMENU","openFragment(new HomeFragment())");
+                    replaceFragment(HomeFragment.newInstance("",""), "HOMEFRAGMENT", "HOME");
                     return true;
 
                 case R.id.contact:
-                    openFragment(new TrendFragment());
+                    replaceFragment(ContactFragment.newInstance("",""), "CONTACTFRAGMENT", "CONTACT");
                     return true;
 
                 case R.id.profile:
-                    openFragment(new AccountFragment());
+                    replaceFragment(ProfileFragment.newInstance("",""), "PROFILEFRAGMENT", "PROFILE");
                     return true;
 
                 case R.id.setting:
-                    openFragment(new SettingsFragment());
+                    replaceFragment(SettingsFragment.newInstance("",""), "SETTINGSFRAGMENT", "SETTINGS");
                     return true;
 
             }
@@ -71,5 +74,15 @@ public class MainActivity extends AppCompatActivity {
                 return(true);
         }
         return(super.onOptionsItemSelected(item));
+    }
+
+    protected void replaceFragment(@NonNull Fragment fragment,
+                                   @NonNull String fragmentTag,
+                                   @Nullable String backStackStateName) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frameLayout, fragment, fragmentTag)
+                .addToBackStack(backStackStateName)
+                .commit();
     }
 }
