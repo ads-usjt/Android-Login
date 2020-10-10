@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(SettingsFragment.newInstance("",""), "SETTINGSFRAGMENT", "SETTINGS");
                     return true;
 
+                case R.id.map:
+                    replaceFragment(MapFragment.newInstance("",""), "MAPFRAGMENT", "MAP");
+                    return true;
+
             }
 
             return false;
