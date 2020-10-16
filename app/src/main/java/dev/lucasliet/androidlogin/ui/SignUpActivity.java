@@ -1,6 +1,10 @@
 package dev.lucasliet.androidlogin.ui;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -30,41 +34,20 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ActionBarFactory.createActionBar(getSupportActionBar());
-        Hawk.init(this).build();
-
-        editTextCPF = findViewById(R.id.editTextCPF);
-        editTextEmail = findViewById(R.id.editTextEmail);
-        editTextName = findViewById(R.id.editTextName);
-        editTextPassword = findViewById(R.id.editTextPassword);
-
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        userViewModel.getUser().observe(this, this::updateView);
+        replaceFragment(R.id.frameLayoutMainF,
+                ProfileFragment.newInstance(true,"")
+                ,"PROFILEFRAGMENT",
+                "INITIALPROFILE");
     }
 
-    private void updateView(User user){
-        if(user != null && user.getId() > 0){
-            currentUser = user;
-            editTextName.setText(user.getName());
-            editTextCPF.setText(user.getCpf());
-            editTextEmail.setText(user.getEmail());
-            editTextPassword.setText(user.getPassword());
-        }
-    }
-
-    public void Save(View view) {
-        if (currentUser == null) currentUser = new User();
-        currentUser.setCpf(editTextCPF.getText().toString());
-        currentUser.setEmail(editTextEmail.getText().toString());
-        currentUser.setName(editTextName.getText().toString());
-        currentUser.setPassword(editTextPassword.getText().toString());
-
-        userViewModel.insert(currentUser);
-        Toast.makeText(
-                this,
-                R.string.user_register_sucess,
-                Toast.LENGTH_SHORT
-        ).show();
-        Hawk.put("has_registration", true);
-        finish();
+    protected void replaceFragment(@IdRes int containerViewId,
+                                   @NonNull Fragment fragment,
+                                   @NonNull String fragmentTag,
+                                   @Nullable String backStackStateName) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerViewId, fragment, fragmentTag)
+                .addToBackStack(backStackStateName)
+                .commit();
     }
 }

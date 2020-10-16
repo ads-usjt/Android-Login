@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.profile:
-                    replaceFragment(ProfileFragment.newInstance("",""), "PROFILEFRAGMENT", "PROFILE");
+                    replaceFragment(ProfileFragment.newInstance(false,""), "PROFILEFRAGMENT", "PROFILE");
                     return true;
 
                 case R.id.setting:
@@ -70,9 +70,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.edit:
-                Intent intent = new Intent(this,SignUpActivity.class);
-                startActivity(intent);
             case R.id.exit:
                 finish();
                 return(true);
