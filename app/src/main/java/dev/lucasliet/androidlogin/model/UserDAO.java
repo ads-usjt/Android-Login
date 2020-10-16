@@ -6,8 +6,6 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import dev.lucasliet.androidlogin.model.User;
-
 @Dao
 public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
