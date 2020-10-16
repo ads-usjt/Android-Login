@@ -76,6 +76,7 @@ public class ProfileFragment extends Fragment {
         editTextEmail = view.findViewById(R.id.editTextEmailF);
         editTextName = view.findViewById(R.id.editTextNameF);
         editTextPassword = view.findViewById(R.id.editTextPasswordF);
+        buttonSave = view.findViewById(R.id.buttonSaveF);
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,8 +113,8 @@ public class ProfileFragment extends Fragment {
                 Toast.LENGTH_SHORT
         ).show();
         Hawk.put("has_registration", true);
-        if(mParam1){
-            getActivity().finish();
-        }
+//        if(mParam1){
+//            getActivity().finish();
+//        }
     }
 }

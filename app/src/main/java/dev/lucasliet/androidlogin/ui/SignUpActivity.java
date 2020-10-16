@@ -37,7 +37,7 @@ public class SignUpActivity extends AppCompatActivity {
         replaceFragment(R.id.frameLayoutMainF,
                 ProfileFragment.newInstance(true,"")
                 ,"PROFILEFRAGMENT",
-                "INITIALPROFILE");
+                "PROFILE");
     }
 
     protected void replaceFragment(@IdRes int containerViewId,
