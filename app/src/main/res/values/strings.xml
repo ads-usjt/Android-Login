@@ -2,6 +2,8 @@
     <string name="app_name">CadLog</string>
     <string name="user_not_found">Usuário não encontrado</string>
     <string name="user_register_sucess">Usuário Salvo com sucesso!</string>
+    <string name="contact_register_sucess">Contato Salvo com sucesso!</string>
+    <string name="contact_register_fail">Houve um erro ao salvar o Contato</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

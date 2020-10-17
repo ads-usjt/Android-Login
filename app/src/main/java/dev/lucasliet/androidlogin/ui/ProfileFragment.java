@@ -113,8 +113,8 @@ public class ProfileFragment extends Fragment {
                 Toast.LENGTH_SHORT
         ).show();
         Hawk.put("has_registration", true);
-//        if(mParam1){
-//            getActivity().finish();
-//        }
+        if(mParam1){
+            getActivity().finish();
+        }
     }
 }
