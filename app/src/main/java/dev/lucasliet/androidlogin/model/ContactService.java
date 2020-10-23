@@ -11,7 +11,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ContactService {
-    String apiKey = "4fdc50607b9e4d9f9214ddc051dcb9e8";
+    String apiKey = "897be3e22de94fc293976a70586c2a5b";
 
     @GET("api/"+apiKey+"/contact")
     Call<List<Contact>> getAllContacts();

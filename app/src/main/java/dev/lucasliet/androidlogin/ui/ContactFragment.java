@@ -87,12 +87,14 @@ public class ContactFragment extends Fragment {
 
         contactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
         contactViewModel.getSaveSuccess().observe(getActivity(), wasContactSaveSuccessful -> {
-            if (wasContactSaveSuccessful)
+            if (wasContactSaveSuccessful){
                 Toast.makeText(
                         getActivity(),
                         R.string.contact_register_sucess,
                         Toast.LENGTH_SHORT
                 ).show();
+                eraseFields();
+            }
             else
                 Toast.makeText(
                         getActivity(),
@@ -104,10 +106,39 @@ public class ContactFragment extends Fragment {
 
     public void save() {
         if (currentContact == null) currentContact = new Contact();
-        currentContact.setEmail(editTextEmail.getText().toString());
-        currentContact.setName(editTextName.getText().toString());
-        currentContact.setPhone(editTextPhone.getText().toString());
+        if (validateFields()){
+            currentContact.setEmail(editTextEmail.getText().toString());
+            currentContact.setName(editTextName.getText().toString());
+            currentContact.setPhone(editTextPhone.getText().toString());
 
-        contactViewModel.saveContact(currentContact);
+            contactViewModel.saveContact(currentContact);
+        }
+    }
+
+    public void eraseFields() {
+        editTextPhone.setText("");
+        editTextEmail.setText("");
+        editTextName.setText("");
+    }
+
+    public boolean validateFields(){
+
+        boolean valid = true;
+        if(editTextName.getText().toString().trim().length()==0){
+            valid = false;
+            Toast.makeText(getActivity(),"Nome inválido!",
+                    Toast.LENGTH_SHORT).show();
+        }
+        if(editTextEmail.getText().toString().trim().length()==0){
+            valid = false;
+            Toast.makeText(getActivity(),"Email inválido!",
+                    Toast.LENGTH_SHORT).show();
+        }
+        if(editTextPhone.getText().toString().trim().length()==0){
+            valid = false;
+            Toast.makeText(getActivity(),"Telefone inválido!",
+                    Toast.LENGTH_SHORT).show();
+        }
+        return valid;
     }
 }

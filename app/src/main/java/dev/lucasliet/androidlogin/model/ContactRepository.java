@@ -33,7 +33,7 @@ public class ContactRepository {
                 .build()
                 .create(ContactService.class);
     }
-
+    
     public void getContacts() {
         contactService.getAllContacts()
                 .enqueue(new Callback<List<Contact>>() {
