@@ -2,13 +2,24 @@ package dev.lucasliet.androidlogin.ui;
 
 import android.os.Bundle;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import dev.lucasliet.androidlogin.R;
+import dev.lucasliet.androidlogin.model.Contact;
+import dev.lucasliet.androidlogin.model.ContactViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +33,10 @@ public class HomeFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    private ContactViewModel contactViewModel;
+    private List<Contact> contacts;
+    private ContactAdapter adapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -52,12 +67,49 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        adapter = new ContactAdapter();
+        contactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
+        contactViewModel.getContactsResponseLiveData().observe(this, new Observer<List<Contact>>() {
+            @Override
+            public void onChanged(List<Contact> contactsList) {
+                if (contactsList != null) {
+                    adapter.setResults(contactsList);
+                }
+            }
+        });
+        adapter.setOnItemClickListener((position, contact) -> {
+//                replaceFragment(R.id.frameLayout,
+//                        ContactFragment.newInstance("",contact),
+//                        ContactFragment.CONTACT_FRAGMENT_TAG,
+//                        "contato_click");
+        });
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerViewContacts);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+
+        return view;
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        contactViewModel.getContacts();
+    }
+    protected void replaceFragment(@IdRes int containerViewId,
+                                   @NonNull Fragment fragment,
+                                   @NonNull String fragmentTag,
+                                   @Nullable String backStackStateName) {
+
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerViewId, fragment, fragmentTag)
+                .addToBackStack(backStackStateName)
+                .commit();
     }
 }

@@ -86,8 +86,8 @@ public class ContactFragment extends Fragment {
         });
 
         contactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
-        contactViewModel.getSaveSuccess().observe(getActivity(), wasContactSaveSuccessful -> {
-            if (wasContactSaveSuccessful){
+        contactViewModel.getSaveSuccess().observe( getActivity(), ( wasContactSaveSuccessful ) -> {
+            if ( wasContactSaveSuccessful ){
                 Toast.makeText(
                         getActivity(),
                         R.string.contact_register_sucess,
@@ -122,7 +122,6 @@ public class ContactFragment extends Fragment {
     }
 
     public boolean validateFields(){
-
         boolean valid = true;
         if(editTextName.getText().toString().trim().length()==0){
             valid = false;
