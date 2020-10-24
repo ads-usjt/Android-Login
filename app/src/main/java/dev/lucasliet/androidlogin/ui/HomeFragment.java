@@ -37,6 +37,7 @@ public class HomeFragment extends Fragment {
     private ContactViewModel contactViewModel;
     private List<Contact> contacts;
     private ContactAdapter adapter;
+    private ProgressBar progressBar;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -76,6 +77,8 @@ public class HomeFragment extends Fragment {
                 if (contactsList != null) {
                     adapter.setResults(contactsList);
                 }
+                progressBar.setVisibility(View.GONE);
+
             }
         });
         adapter.setOnItemClickListener((position, contact) -> {
@@ -94,11 +97,14 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
+        progressBar = findViewById(R.id.progressBar);
+
         return view;
     }
     @Override
     public void onResume(){
         super.onResume();
+        progressBar.setVisibility(View.VISIBLE);
         contactViewModel.getContacts();
     }
     protected void replaceFragment(@IdRes int containerViewId,

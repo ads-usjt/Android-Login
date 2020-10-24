@@ -1,5 +1,7 @@
 package dev.lucasliet.androidlogin.ui;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,11 +9,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.orhanobut.hawk.Hawk;
@@ -24,6 +29,8 @@ import dev.lucasliet.androidlogin.model.ContactViewModel;
 import dev.lucasliet.androidlogin.model.User;
 import dev.lucasliet.androidlogin.model.UserViewModel;
 
+import static android.app.Activity.RESULT_OK;
+
 public class ContactFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
@@ -35,6 +42,9 @@ public class ContactFragment extends Fragment {
     private EditText editTextEmail;
     private EditText editTextPhone;
     private Button buttonSave;
+
+    private ImageView contactPhoto;
+    private TextView contactLink;
 
     private String mParam1;
     private Contact mParam2;
@@ -78,6 +88,16 @@ public class ContactFragment extends Fragment {
         editTextPhone = view.findViewById(R.id.editTextPhoneC);
         buttonSave = view.findViewById(R.id.buttonSaveC);
 
+        contactPhoto = view.findViewById(R.id.contactPhoto);
+        contactLink = view.findViewById(R.id.contactLink);
+
+        contactLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takePicture();
+            }
+        });
+
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +129,29 @@ public class ContactFragment extends Fragment {
             editTextEmail.setText(currentContact.getEmail());
             editTextPhone.setText(currentContact.getPhone());
         }
+    }
+
+    public void takePicture() {
+        dispatchTakePictureIntent();
+    }
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            contactPhoto.setImageBitmap(imageBitmap);
+        }
+
     }
 
     public void save() {
