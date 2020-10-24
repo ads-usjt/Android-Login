@@ -37,17 +37,17 @@ public class ContactFragment extends Fragment {
     private Button buttonSave;
 
     private String mParam1;
-    private String mParam2;
+    private Contact mParam2;
 
     public ContactFragment() {
         // Required empty public constructor
     }
 
-    public static ContactFragment newInstance(String param1, String param2) {
+    public static ContactFragment newInstance(String param1, Contact param2) {
         ContactFragment fragment = new ContactFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,7 +57,7 @@ public class ContactFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam2 = (Contact) getArguments().getSerializable(ARG_PARAM2);
         }
     }
 
@@ -102,6 +102,13 @@ public class ContactFragment extends Fragment {
                         Toast.LENGTH_SHORT
                 ).show();
         });
+
+        if (mParam2 != null){
+            currentContact = mParam2;
+            editTextName.setText(currentContact.getName());
+            editTextEmail.setText(currentContact.getEmail());
+            editTextPhone.setText(currentContact.getPhone());
+        }
     }
 
     public void save() {
@@ -111,7 +118,10 @@ public class ContactFragment extends Fragment {
             currentContact.setName(editTextName.getText().toString());
             currentContact.setPhone(editTextPhone.getText().toString());
 
-            contactViewModel.saveContact(currentContact);
+            if(mParam1 != null)
+                contactViewModel.saveContact(currentContact);
+            else
+                contactViewModel.updateContact(currentContact);
         }
     }
 

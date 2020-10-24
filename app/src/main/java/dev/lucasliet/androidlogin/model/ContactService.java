@@ -8,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ContactService {
@@ -21,11 +22,11 @@ public interface ContactService {
             @Body Contact contact
         );
 
-//    @PUT("api/"+apiKey+"/contact/{id}")
-//    Call<ResponseBody> updateContact(
-//            @Path("id") String id,
-//            @Body ContactPut contactPut
-//       );
+    @PUT("api/"+apiKey+"/contact/{id}")
+    Call<ResponseBody> updateContact(
+            @Path("id") String id,
+            @Body ContactPut contactPut
+       );
 
     @DELETE("api/"+apiKey+"/contact/{id}")
     Call<ResponseBody> deleteContact(

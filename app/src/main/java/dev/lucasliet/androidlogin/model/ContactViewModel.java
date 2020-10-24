@@ -32,7 +32,7 @@ public class ContactViewModel extends AndroidViewModel {
     public void saveContact(Contact contact){
         contactRepository.saveContact(contact);
     }
-//    public void updateContact(Contact contact){
-//        contactRepository.updateContact(contact);
-//    }
+    public void updateContact(Contact contact){
+        contactRepository.updateContact(contact);
+    }
 }

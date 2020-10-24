@@ -76,29 +76,27 @@ public class ContactRepository {
                 });
     }
 
-//    public void updateContact(Contact contact){
-//        ContactPut contatoPut = new ContactPut(contact.getName(),contact.getEmail(),
-//                contact.getPhone();
-//        contactService.updateContact(contact.getId(),contatoPut)
-//                .enqueue(new Callback<ResponseBody>() {
-//                    @Override
-//
-//                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//
-//                        if (response.body() != null) {
-//                            Log.d("RESPOSTA", "tenho resultato-->"+response.body());
-//                            saveSuccessMutableLiveData.postValue(new Boolean(true));
-//                        }
-//                    }
-//                    @Override
-//
-//                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-//
-//                        Log.e("RESPOSTA", "FALHOU->"+t.getMessage());
-//                        saveSuccessMutableLiveData.postValue(new Boolean(false));
-//                    }
-//                });
-//    }
+    public void updateContact(Contact contact){
+        ContactPut contatoPut = new ContactPut(contact.getName(),contact.getEmail(),
+                contact.getPhone());
+        contactService.updateContact(contact.getId(),contatoPut)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.body() != null) {
+                            Log.d("RESPOSTA", "tenho resultato-->"+response.body());
+                            saveSuccessMutableLiveData.postValue(new Boolean(true));
+                        }
+                    }
+                    @Override
+
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                        Log.e("RESPOSTA", "FALHOU->"+t.getMessage());
+                        saveSuccessMutableLiveData.postValue(new Boolean(false));
+                    }
+                });
+    }
 
     public Call<ResponseBody> deleteContact(Contact contato){
         return contactService.deleteContact(contato.getId());

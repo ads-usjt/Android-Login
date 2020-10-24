@@ -79,10 +79,10 @@ public class HomeFragment extends Fragment {
             }
         });
         adapter.setOnItemClickListener((position, contact) -> {
-//                replaceFragment(R.id.frameLayout,
-//                        ContactFragment.newInstance("",contact),
-//                        ContactFragment.CONTACT_FRAGMENT_TAG,
-//                        "contato_click");
+                replaceFragment(R.id.frameLayout,
+                        ContactFragment.newInstance("",contact),
+                        "CONTACTFRAGMENT",
+                        "contato_click");
         });
     }
 

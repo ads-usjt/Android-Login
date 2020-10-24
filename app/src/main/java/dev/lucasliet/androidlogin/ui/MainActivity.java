@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.contact:
-                    replaceFragment(ContactFragment.newInstance("",""), "CONTACTFRAGMENT", "CONTACT");
+                    replaceFragment(ContactFragment.newInstance("",null), "CONTACTFRAGMENT", "CONTACT");
                     return true;
 
                 case R.id.profile:
