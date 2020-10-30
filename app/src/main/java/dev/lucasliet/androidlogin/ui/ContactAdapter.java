@@ -3,6 +3,7 @@ package dev.lucasliet.androidlogin.ui;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import dev.lucasliet.androidlogin.R;
 import dev.lucasliet.androidlogin.model.Contact;
+import dev.lucasliet.androidlogin.util.ImageUtil;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactHolder> {
     private List<Contact> results = new ArrayList<>();
@@ -30,7 +32,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactH
         holder.textViewNome.setText(contact.getName());
         holder.textViewEmail.setText(contact.getEmail());
         holder.textViewTelefone.setText(contact.getPhone());
-
+        holder.contactPhotoCard.setImageBitmap(ImageUtil.decode(contact.getImage()));
     }
 
     @Override
@@ -45,12 +47,14 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactH
         private TextView textViewNome;
         private TextView textViewEmail;
         private TextView textViewTelefone;
+        private ImageView contactPhotoCard;
 
         public ContactHolder(@NonNull View itemView) {
             super(itemView);
             textViewNome = itemView.findViewById(R.id.textViewContactName);
             textViewEmail = itemView.findViewById(R.id.textViewContactEmail);
             textViewTelefone = itemView.findViewById(R.id.textViewContactPhone);
+            contactPhotoCard = itemView.findViewById(R.id.contactPhotoCard);
             itemView.setOnClickListener(this);
         }
         @Override

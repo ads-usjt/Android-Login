@@ -123,6 +123,7 @@ public class ContactFragment extends Fragment {
             contactPhoto.setImageBitmap(ImageUtil.decode(currentContact.getImage()));
         } else {
             currentContact = new Contact();
+            contactPhoto.setImageResource(R.drawable.ic_placeholder);
         }
     }
 
