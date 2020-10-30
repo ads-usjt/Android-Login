@@ -21,6 +21,17 @@ public class Contact implements Serializable {
     @Expose
     private String phone;
 
+    @Expose
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getId() {
         return id;
     }

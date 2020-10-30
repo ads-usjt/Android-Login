@@ -12,7 +12,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ContactService {
-    String apiKey = "897be3e22de94fc293976a70586c2a5b";
+    String apiKey = "c7f8aa1f5a344936a44cdb37ae93e03e";
 
     @GET("api/"+apiKey+"/contact")
     Call<List<Contact>> getAllContacts();

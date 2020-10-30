@@ -15,10 +15,22 @@ public class ContactPut implements Serializable {
     @Expose
     private String phone;
 
-    public ContactPut(String name, String email, String phone) {
+    @Expose
+    private String image;
+
+    public ContactPut(String name, String email, String phone, String image) {
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {

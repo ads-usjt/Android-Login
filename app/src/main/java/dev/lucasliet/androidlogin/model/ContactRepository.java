@@ -78,7 +78,7 @@ public class ContactRepository {
 
     public void updateContact(Contact contact){
         ContactPut contatoPut = new ContactPut(contact.getName(),contact.getEmail(),
-                contact.getPhone());
+                contact.getPhone(), contact.getImage());
         contactService.updateContact(contact.getId(),contatoPut)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override

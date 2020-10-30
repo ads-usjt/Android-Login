@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import dev.lucasliet.androidlogin.model.Contact;
 import dev.lucasliet.androidlogin.model.ContactViewModel;
 import dev.lucasliet.androidlogin.model.User;
 import dev.lucasliet.androidlogin.model.UserViewModel;
+import dev.lucasliet.androidlogin.util.ImageUtil;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -91,19 +93,9 @@ public class ContactFragment extends Fragment {
         contactPhoto = view.findViewById(R.id.contactPhoto);
         contactLink = view.findViewById(R.id.contactLink);
 
-        contactLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takePicture();
-            }
-        });
+        contactLink.setOnClickListener(v -> takePicture());
 
-        buttonSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                save();
-            }
-        });
+        buttonSave.setOnClickListener(v -> save());
 
         contactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
         contactViewModel.getSaveSuccess().observe( getActivity(), ( wasContactSaveSuccessful ) -> {
@@ -128,6 +120,9 @@ public class ContactFragment extends Fragment {
             editTextName.setText(currentContact.getName());
             editTextEmail.setText(currentContact.getEmail());
             editTextPhone.setText(currentContact.getPhone());
+            contactPhoto.setImageBitmap(ImageUtil.decode(currentContact.getImage()));
+        } else {
+            currentContact = new Contact();
         }
     }
 
@@ -150,12 +145,14 @@ public class ContactFragment extends Fragment {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             contactPhoto.setImageBitmap(imageBitmap);
+            contactPhoto.setImageBitmap(imageBitmap);
+            currentContact.setImage(ImageUtil.encode(imageBitmap));
+            Log.d("IMAGEMBITMAPENCODED-->", currentContact.getImage());
         }
 
     }
 
     public void save() {
-        if (currentContact == null) currentContact = new Contact();
         if (validateFields()){
             currentContact.setEmail(editTextEmail.getText().toString());
             currentContact.setName(editTextName.getText().toString());
@@ -172,6 +169,7 @@ public class ContactFragment extends Fragment {
         editTextPhone.setText("");
         editTextEmail.setText("");
         editTextName.setText("");
+        contactPhoto.setImageResource(R.drawable.ic_placeholder);
     }
 
     public boolean validateFields(){
